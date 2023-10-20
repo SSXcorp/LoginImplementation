@@ -1,7 +1,5 @@
 package ssx.info.web.service;
 
-
-
 import org.springframework.stereotype.Service;
 import ssx.info.web.model.User;
 import ssx.info.web.repository.UserRepository;
