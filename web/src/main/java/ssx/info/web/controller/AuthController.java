@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import ssx.info.web.model.User;
 import ssx.info.web.service.UserService;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Controller
 @RequestMapping("")
 public class AuthController {
@@ -55,8 +58,15 @@ public class AuthController {
     public String createNewUser(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("user")User user){
 
         try {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            Date date = new Date();
 
             user.setRole("USER");
+            user.setCountry("Default");
+            user.setDateOfBirth(date);
+            user.setGender("Default");
+            user.setOccupation("Default");
+
 
             User newUser = userService.createUser(user);
             if(newUser == null){
