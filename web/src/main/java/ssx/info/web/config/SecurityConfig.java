@@ -10,6 +10,8 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import ssx.info.web.service.CustomUserDetailsService;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -36,6 +38,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 );
         http
+                .oauth2Login(withDefaults())
                 .formLogin(form -> form
                         .loginPage("/login")
                         .permitAll()
@@ -49,5 +52,16 @@ public class SecurityConfig {
         return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
     }
 
+//    @Bean
+//   SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        return http
+//                .authorizeHttpRequests(auth -> {
+//                    auth.requestMatchers("/", "/home","/home.css").permitAll();
+//                    auth.anyRequest().authenticated();
+//                })
+//                .oauth2Login("/login")
+//                .formLogin("/login")
+//                .build();
+//    }
 }
 
